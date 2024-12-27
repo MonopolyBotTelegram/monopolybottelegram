@@ -3,15 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Mundo</title>
+    <title>Tablero de Casillas</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="contenido">
-        <h1 id="mensaje">MonopolyBT</h1>
-        <button id="cambiarTexto">Cambiar mensaje</button>
+<div id="board-container"></div>
+
+<!--MODAL CLICK EN CELDA -->
+<!-- Primer Modal -->
+<div id="cellModal" class="modal">
+    <div class="modal-content">
+        <div id="modalTitle" class="modalTitle"></div> <!-- Título del modal -->
+        <div id="modalBody" class="modalBody">
+            <table id="modalTable"></table> <!-- Tabla dentro del modal -->
+        </div>
+        <div id="modalFooter" class="modalFooter">
+            <button id="footerBtn">Upgrade</button> <!-- Botón en el pie -->
+        </div>
     </div>
-    <script src="script.js"></script>
+    <button class="close-button"></button> <!-- Botón de cerrar (X) en la esquina superior derecha -->
+</div>
+
+<!-- Segundo Modal -->
+<div id="secondModal" class="modal">
+    <div class="modal-content">
+        <div id="secondModalTitle" class="modalTitle">Second Modal</div>
+        <div id="secondModalBody" class="modalBody">
+            <p>Welcome to the second modal!</p>
+        </div>
+        <div id="secondModalFooter" class="modalFooter">
+            <button id="secondFooterBtn">Close</button> <!-- Botón de cerrar en el segundo modal -->
+        </div>
+    </div>
+    <button class="close-button"></button> <!-- Botón de cerrar (X) en el segundo modal -->
+</div>
+
+
+<!--MODAL CLICK EN CELDA -->
+
+<script src="script.js"></script>
+<script src="scripts/CONSTANTES.js"></script>
+<script src="scripts/CREATOR.js"></script>
+<script src="scripts/FUNCIONES.js"></script>
+
 </body>
 </html>
-

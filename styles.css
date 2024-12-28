@@ -120,7 +120,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para el modal */
     flex-direction: column; /* Asegura que el contenido esté organizado en columna */
     overflow: hidden; /* Oculta el desbordamiento general */
-    padding-bottom: 50px; /* Añadimos un espacio para el pie sin que tape el contenido */
+    padding-bottom: 0; /* Asegura que no haya espacio entre el contenido y el pie */
 }
 
 /* Título del modal */
@@ -139,25 +139,20 @@ body {
     flex-grow: 1; /* La tabla crecerá para ocupar el espacio disponible */
     overflow-y: auto; /* Permite que la tabla se desplace verticalmente */
     overflow-x: auto; /* Permite que la tabla se desplace horizontalmente */
-    padding: 10px;
-    margin-bottom: 0; /* Elimina el margen inferior */
+    margin: 0; /* Elimina el margen interno */
+    padding: 0; /* Elimina el relleno interno */
     display: flex;
     flex-direction: column; /* Organiza las filas en una columna */
     justify-content: flex-start; /* Alinea las filas al principio */
-    height: calc(100% - 100px); /* Ajustamos la altura disponible para la tabla, teniendo en cuenta el título y el pie */
-    position: relative; /* Permite el desplazamiento */
-    min-height: 0; /* Esto asegura que el contenedor de la tabla no tenga una altura mínima */
-    max-height: calc(100% - 120px); /* Limita la altura para que no ocupe todo el espacio */
-    overflow: auto; /* Asegura que la barra se muestre correctamente */
+    height: calc(100% - 50px); /* Ajusta la altura considerando el pie */
 }
 
 /* Aseguramos que la tabla se pueda desplazar */
 #modalTable {
     width: 100%;
+    height: 100%; /* La tabla ocupa todo el alto del modalBody */
     border-collapse: collapse;
     table-layout: fixed; /* Controla el tamaño de las celdas */
-    min-height: 100%; /* Hace que la tabla ocupe el espacio disponible */
-    display: block; /* Asegura que se pueda desplazar correctamente */
 }
 
 /* Filas de la tabla */
@@ -171,12 +166,6 @@ body {
     border: 2px solid #ddd;
     padding: 2px 5px; /* Ajustamos el relleno para hacer las celdas más compactas */
     vertical-align: middle; /* Alinea verticalmente el contenido */
-}
-
-/* Imagen dentro de las celdas */
-#modalTable img {
-    width: 10px; /* Ajustamos las imágenes a un tamaño pequeño */
-    height: 10px;
 }
 
 /* Pie del modal (botón fijo en la parte inferior) */
@@ -205,6 +194,14 @@ body {
 .modalFooter button:hover {
     background-color: #45a049;
 }
+
+
+
+
+
+
+
+
 
 /* Estilo para el botón de cerrar */
 .close-button {

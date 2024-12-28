@@ -1,10 +1,10 @@
 const cellImgByNumber = [
-['imgs/celdas/CASUAL.png','imgs/celdas/VERDE_CLARO.png','imgs/celdas/TAX.png','imgs/celdas/VERDE_CLARO.png','imgs/celdas/JAIL.png'],
+['imgs/celdas/CASUAL_0.png','imgs/celdas/VERDE_CLARO.png','imgs/celdas/TAX.png','imgs/celdas/VERDE_CLARO.png','imgs/celdas/JAIL.png'],
 ['imgs/celdas/NARANJA.png', null, null, null, 'imgs/celdas/VERDE_OSCURO.png'],
 ['imgs/celdas/NARANJA.png', null, null, null, 'imgs/celdas/VERDE_OSCURO.png'],
 ['imgs/celdas/AMARILLO.png', null, null, null, 'imgs/celdas/AZUL.png'],
 ['imgs/celdas/AMARILLO.png', null, null, null,'imgs/celdas/AZUL.png'],
-['imgs/celdas/START.png','imgs/celdas/VIOLETA.png','imgs/celdas/BANK.png','imgs/celdas/VIOLETA.png','imgs/celdas/CASUAL.png']
+['imgs/celdas/START.png','imgs/celdas/VIOLETA.png','imgs/celdas/BANK.png','imgs/celdas/VIOLETA.png','imgs/celdas/CASUAL_1.png']
 ];
 
 const casillas=[

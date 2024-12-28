@@ -119,7 +119,7 @@ const nameElement = document.createElement('div');
 nameElement.textContent = cellRaresa;
 nameElement.style.marginBottom = '5px';
 nameElement.style.textAlign = 'center';
-nameElement.style.fontSize = '16px';  // Tamaño de la fuente ajustable
+nameElement.style.fontSize = '12px';  // Tamaño de la fuente ajustable
 nameElement.style.color = 'black';  // Color del texto negro
 nameElement.style.fontWeight = 'bold';  // Hacer el texto más destacado
 

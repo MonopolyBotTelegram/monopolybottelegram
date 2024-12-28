@@ -196,10 +196,11 @@ body {
 }
 
 
-
-
-
-
+/* Estilo para la primera columna */
+#modalTable td:first-child {
+    min-width: 25px; /* Establece el ancho mínimo de la primera columna a 3 caracteres */
+    width: 25px; /* Establece el ancho exacto de la primera columna */
+}
 
 
 

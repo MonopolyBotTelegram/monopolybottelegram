@@ -39,12 +39,36 @@
 </div>
 
 
-<!--MODAL CLICK EN CELDA -->
+<!-- Modal deposit PARA FUTURO-->
+<div id="myModal_deposit" class="modal_deposit">
+    <div class="modal_deposit-content">
+        <span class="close_deposit-button" onclick="closeModal_deposit()">&times;</span>
+        <!-- Aquí se cargará el iframe -->
+        <iframe id="modalIframe_deposit" src="" width="100%" height="500px" frameborder="0"></iframe>
+    </div>
+</div>
+
+
+<!-- Primer Modal_deposit -->
+<div id="cellModal_deposit" class="modal_deposit">
+    <div class="modal_deposit-content">
+        <div id="modalTitle_deposit" class="modalTitle_deposit"></div> <!-- Título del modal -->
+        <div id="modalBody_deposit" class="modalBody_deposit">
+            <table id="modalTable_deposit"></table> <!-- Tabla dentro del modal -->
+        </div>
+    </div>
+    <button id="close_deposit-button" class="close_deposit-button"></button> <!-- Botón de cerrar (X) en la esquina superior derecha -->
+</div>
 
 <script src="script.js"></script>
 <script src="scripts/CONSTANTES.js"></script>
 <script src="scripts/CREATOR.js"></script>
 <script src="scripts/FUNCIONES.js"></script>
+<script src="scripts/DEPOSIT.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers/dist/ethers.umd.min.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
 
 </body>
 </html>

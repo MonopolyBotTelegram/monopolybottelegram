@@ -84,10 +84,6 @@ boardContainer.appendChild(cell);
 // Selecciona todas las celdas
 const cells = document.querySelectorAll('.cell');
 
-//##### PONER LOS NOMBRES EN LAS CASILLAS y el MODAL####//
-const modal = document.getElementById('cellModal');
-const closeModal = document.querySelector('.close');
-
 // Nombres que deben ser excluidos
 const excludedNames = ['?', 'JAIL', 'TAX', 'BANK', 'START'];
 
@@ -153,18 +149,6 @@ CREATOR_balance_cell();
 CREATOR_mined_cell();
 CREATOR_deposit_cell();
 CREATOR_withdrawal_cell();
-
-// Cerrar el modal al hacer clic en la "X"
-closeModal.addEventListener('click', () => {
-modal.style.display = 'none';
-});
-
-// Cerrar el modal al hacer clic fuera de él
-window.addEventListener('click', (event) => {
-if(event.target === modal) {
-modal.style.display = 'none';
-}
-});
 
 
 });

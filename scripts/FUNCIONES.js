@@ -30,9 +30,10 @@ function FUNCIONES_mostrarModal0(cellNumber, baseImg, nestedImg, cellEstrellas, 
                 if(i===0){
                 const img = document.createElement('img');
                 img.src = nestedImg; // Cambia por la fuente de la imagen
-                img.style.width = '25px'; // Ajusta el tamaño de la imagen
-                img.style.height = '25px';
+                img.style.width = '20px'; // Ajusta el tamaño de la imagen
+                img.style.height = '20px';
                  img.style.borderRadius = '50%'; // Hacer que la imagen sea circular
+                  img.style.backgroundPosition = 'center'; // Centrar la imagen
                 cell.appendChild(img);
                 }else{
                     const text = document.createElement('span');

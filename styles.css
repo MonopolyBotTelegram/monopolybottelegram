@@ -12,23 +12,24 @@ body {
     background-color: #f0f0f0;
 }
 
+
+
+
+
+
+
 #board-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columnas con el mismo tamaño */
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas iguales */
     grid-template-rows: repeat(6, 1fr); /* 6 filas iguales */
     width: 90vw; /* 90% del ancho de la pantalla */
     height: 90vh; /* 90% de la altura de la pantalla */
     border: 2px solid #333;
     position: relative;
     gap: 0; /* Eliminar cualquier separación entre las celdas */
-    max-width: 500px; /* Máximo ancho en dispositivos grandes */
-    max-height: 600px; /* Máxima altura en dispositivos grandes */
+    /* Eliminar restricciones de ancho y alto máximos */
 }
 
-
-
-
-/*#### CASILLAS ####*/
 .cell {
     display: flex;
     flex-direction: column; /* Organiza los elementos en columnas */
@@ -36,7 +37,25 @@ body {
     align-items: center; /* Centra los elementos horizontalmente */
     text-align: center; /* Asegura que el texto esté centrado */
     padding: 5px; /* Espaciado interno */
+    width: 100%; /* Asegura que las celdas ocupen todo el ancho disponible */
+    height: 100%; /* Asegura que las celdas ocupen toda la altura disponible */
 }
+
+/* Ajuste de las celdas de la fila inferior */
+#board-container .cell:nth-child(16),
+#board-container .cell:nth-child(17),
+#board-container .cell:nth-child(18),
+#board-container .cell:nth-child(19),
+#board-container .cell:nth-child(20) {
+    margin: 0;
+}
+
+
+
+
+
+
+
 
 .cell span {
     display: block; /* Cada parte (nombre y número) en su línea */
@@ -72,14 +91,7 @@ body {
     height: 100%;
 }
 
-/* Para asegurarse de que la fila inferior esté alineada sin separación */
-#board-container .cell:nth-child(16),
-#board-container .cell:nth-child(17),
-#board-container .cell:nth-child(18),
-#board-container .cell:nth-child(19),
-#board-container .cell:nth-child(20) {
-    margin: 0;
-}
+
 
 /* Media Query para pantallas más pequeñas */
 @media screen and (max-width: 600px) {

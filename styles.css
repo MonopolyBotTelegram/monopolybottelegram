@@ -14,7 +14,7 @@ body {
 
 #board-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columnas iguales */
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas con el mismo tamaño */
     grid-template-rows: repeat(6, 1fr); /* 6 filas iguales */
     width: 90vw; /* 90% del ancho de la pantalla */
     height: 90vh; /* 90% de la altura de la pantalla */
@@ -24,6 +24,7 @@ body {
     max-width: 500px; /* Máximo ancho en dispositivos grandes */
     max-height: 600px; /* Máxima altura en dispositivos grandes */
 }
+
 
 
 
@@ -147,6 +148,11 @@ body {
     height: calc(100% - 50px); /* Ajusta la altura considerando el pie */
 }
 
+
+
+
+
+
 /* Aseguramos que la tabla se pueda desplazar */
 #modalTable {
     width: 100%;
@@ -167,6 +173,11 @@ body {
     padding: 2px 5px; /* Ajustamos el relleno para hacer las celdas más compactas */
     vertical-align: middle; /* Alinea verticalmente el contenido */
 }
+
+
+
+
+
 
 /* Pie del modal (botón fijo en la parte inferior) */
 .modalFooter {

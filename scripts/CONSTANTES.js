@@ -27,11 +27,11 @@ const cellPrecioByNumber=[
 
 
 const cellRaresaByNumber=[
-[null,'Rare',null,'Rare',null],
-['Uncommon',null,null,null,'Epic'],
-['Uncommon',null,null,null,'Epic'],
-['Common',null,null,null,'Legend'],
-['Common',null,null,null,'Legend'],
+[null,'  Rare  ',null,'  Rare  ',null],
+['Uncommon',null,null,null,'  Epic  '],
+['Uncommon',null,null,null,'  Epic  '],
+[' Common ',null,null,null,' Legend '],
+[' Common ',null,null,null,' Legend '],
 [null,'Mythical',null,'Mythical',null]
 ];
 

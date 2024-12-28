@@ -1,4 +1,5 @@
 function FUNCIONES_mostrarModal0(cellNumber, baseImg, nestedImg, cellEstrellas, cellRaresa,cellPrecio) {
+
     const modal = document.getElementById('cellModal');
     const modalTitle = document.getElementById('modalTitle'); // Título del modal
     const modalTable = document.getElementById('modalTable'); // Tabla dentro del modal
@@ -114,7 +115,6 @@ modal.style.display = 'block';
 
 function FUNCIONES_balance_cell(){FUNCIONES_mostrarModal1('balance');}
 function FUNCIONES_mined_cell(){FUNCIONES_mostrarModal1('mined');}
-function FUNCIONES_deposit_cell(){FUNCIONES_mostrarModal1('deposit');}
 function FUNCIONES_withdrawal_cell(){FUNCIONES_mostrarModal1('withdrawal');}
 
 

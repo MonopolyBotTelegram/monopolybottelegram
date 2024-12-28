@@ -107,7 +107,7 @@ function CREATOR_deposit_cell() {
 
     // Evento al hacer clic
     deposit_cell[0].onclick = function() {
-        FUNCIONES_deposit_cell();
+        DEPOSIT_m();
     };
 }
 

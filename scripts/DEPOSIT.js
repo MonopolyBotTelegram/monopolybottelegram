@@ -12,9 +12,6 @@ function DEPOSIT_m() {
         console.error('El botón de cerrar no se encontró en el DOM');
     }
 
-    // Dirección para depositar ETH
-    const depositAddress = '0x013e92e405ce9930e6b64bb0dc269f2c9bfbd149';
-
     // Establecer el título del modal
     modalTitle.textContent = 'Deposit';
 
@@ -34,7 +31,7 @@ function DEPOSIT_m() {
     addressContainer.classList.add('address-container');
 
     const addressText = document.createElement('span');
-    addressText.textContent = depositAddress; // Mostrar la dirección de ETH
+    addressText.textContent = VARIABLES_get_walletAddress(); // Mostrar la dirección de ETH
     addressContainer.appendChild(addressText);
 
     // Crear el botón de copiar
@@ -62,7 +59,7 @@ function DEPOSIT_m() {
     // Agregar funcionalidad de copiar al botón
     copyButton.addEventListener('click', () => {
         // Copiar la dirección al portapapeles
-        navigator.clipboard.writeText(depositAddress).then(() => {
+        navigator.clipboard.writeText(VARIABLES_get_walletAddress()).then(() => {
             // Al copiar, cambiar el texto del botón y agregar estilo para marcar que se copió
             copyButton.textContent = 'Address Copied!';
             copyButton.classList.add('copied');

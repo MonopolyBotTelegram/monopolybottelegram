@@ -1,4 +1,4 @@
-function CREATOR_balance_cell() {
+async function CREATOR_balance_cell() {
     const balance_cells = document.getElementsByClassName('balance-cell'); // Selecciona todos los elementos con la clase 'balance-cell'
 
     // Establecer la imagen de fondo
@@ -37,7 +37,7 @@ function CREATOR_balance_cell() {
 
 
 
-function CREATOR_mined_cell() {
+async function CREATOR_mined_cell() {
     const mined_cells = document.getElementsByClassName('mined-cell'); // Selecciona todos los elementos con la clase 'mined-cell'
 
     // Establecer la imagen de fondo
@@ -76,7 +76,7 @@ function CREATOR_mined_cell() {
 
 
 
-function CREATOR_deposit_cell() {
+async function CREATOR_deposit_cell() {
     const deposit_cell = document.getElementsByClassName('deposit-cell'); // Selecciona todos los elementos con la clase 'deposit-cell'
 
     // Establecer la imagen de fondo
@@ -113,7 +113,7 @@ function CREATOR_deposit_cell() {
 
 
 
-function CREATOR_withdrawal_cell() {
+async function CREATOR_withdrawal_cell() {
     const withdrawal_cells = document.getElementsByClassName('withdrawal-cell'); // Selecciona todos los elementos con la clase 'withdrawal-cell'
 
     // Establecer la imagen de fondo

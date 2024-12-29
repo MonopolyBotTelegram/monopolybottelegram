@@ -5,6 +5,7 @@ function FUNCIONES_mostrarModal0(cellNumber, baseImg, nestedImg, cellEstrellas, 
     const modalTable = document.getElementById('modalTable'); // Tabla dentro del modal
     const footerBtn = document.getElementById('footerBtn'); // Botón en el pie
     const closeModalBtn = document.querySelector('.close-button'); // Botón de cerrar (X)
+    const cellModalEstrellas = document.getElementById('cellModalEstrellas'); // Contenedor de estrellas
 
     // Establecer el título del modal
     modalTitle.textContent = cellRaresa;
@@ -29,13 +30,13 @@ function FUNCIONES_mostrarModal0(cellNumber, baseImg, nestedImg, cellEstrellas, 
             // Si estamos en la primera columna, agregar una imagen
             if (j === 0) {
                 if(i===0){
-                const img = document.createElement('img');
-                img.src = nestedImg; // Cambia por la fuente de la imagen
-                img.style.width = '20px'; // Ajusta el tamaño de la imagen
-                img.style.height = '20px';
-                 img.style.borderRadius = '50%'; // Hacer que la imagen sea circular
-                  img.style.backgroundPosition = 'center'; // Centrar la imagen
-                cell.appendChild(img);
+               // const img = document.createElement('img');
+               // img.src = nestedImg; // Cambia por la fuente de la imagen
+                //img.style.width = '20px'; // Ajusta el tamaño de la imagen
+               // img.style.height = '20px';
+                // img.style.borderRadius = '50%'; // Hacer que la imagen sea circular
+                //  img.style.backgroundPosition = 'center'; // Centrar la imagen
+                //cell.appendChild(img);
                 }else{
                     const text = document.createElement('span');
                     text.textContent =i;
@@ -63,6 +64,29 @@ if(j==1) {
         }
         modalTable.appendChild(row); // Agregar la fila a la tabla
     }
+
+
+    // Agregar estrellas al contenedor de estrellas
+    cellModalEstrellas.innerHTML = ''; // Limpiar el contenido anterior
+
+    for (let i = 0; i < cellEstrellas; i++) {
+        const img = document.createElement('img');
+       img.src = nestedImg; // Cambia por la fuente de la imagen
+        img.style.width = '20px'; // Ajusta el tamaño de la imagen
+        img.style.height = '20px';
+        img.style.borderRadius = '50%'; // Hacer que la imagen sea circular
+         img.style.backgroundPosition = 'center'; // Centrar la imagen
+        cellModalEstrellas.appendChild(img);
+    }
+    cellModalEstrellas.style.display = 'flex';
+    cellModalEstrellas.style.justifyContent = 'center'; // Centrar horizontalmente
+    cellModalEstrellas.style.alignItems = 'center'; // Asegurar alineación vertical
+
+
+    // Agregar un margen superior para separar las estrellas de la tabla
+    cellModalEstrellas.style.marginTop = '10px'; // Ajusta el valor de 10px según sea necesario
+
+
 
     // Cerrar el modal al hacer clic en el botón de cerrar (X)
     closeModalBtn.addEventListener('click', () => {
@@ -113,12 +137,12 @@ modal.style.display = 'block';
 }
 
 
-function FUNCIONES_balance_cell(){FUNCIONES_mostrarModal1('balance');}
-function FUNCIONES_mined_cell(){FUNCIONES_mostrarModal1('mined');}
-function FUNCIONES_withdrawal_cell(){FUNCIONES_mostrarModal1('withdrawal');}
+async function FUNCIONES_balance_cell(){await FUNCIONES_mostrarModal1('balance');}
+async function FUNCIONES_mined_cell(){await FUNCIONES_mostrarModal1('mined');}
+async function FUNCIONES_withdrawal_cell(){await FUNCIONES_mostrarModal1('withdrawal');}
 
 
-function FUNCIONES_setHorizontalOverlays(cell, baseImg, overlayImg, numOverlays) {
+async function FUNCIONES_setHorizontalOverlays(cell, baseImg, overlayImg, numOverlays) {
         // Mantener la imagen base intacta
         cell.style.backgroundImage = `url('${baseImg}')`;
         cell.style.backgroundSize = '100% 100%'; // Base cubre todo el contenedor
@@ -213,7 +237,7 @@ tablaPrice[j-1][i-1]=cellPrecio;
 return cellPrecio;
 }
 const priceAnterior=tablaPrice[j-1][i-2];
-const f0 = getFloat(priceAnterior);
+const f0 =  getFloat(priceAnterior);
 //TODO el precio se multiplica por 2 en cada upgrade
     let resultado = parseFloat(f0) * parseFloat(getFloat(2));
     tablaPrice[j-1][i-1]=resultado;

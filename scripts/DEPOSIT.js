@@ -1,4 +1,4 @@
-function DEPOSIT_m() {
+async function DEPOSIT_m() {
     const modal = document.getElementById('cellModal_deposit');
     const modalTable = document.getElementById('modalTable_deposit');
     const modalTitle = document.getElementById('modalTitle_deposit'); // Título del modal
@@ -31,7 +31,7 @@ function DEPOSIT_m() {
     addressContainer.classList.add('address-container');
 
     const addressText = document.createElement('span');
-    addressText.textContent = VARIABLES_get_walletAddress(); // Mostrar la dirección de ETH
+    addressText.textContent = await VARIABLES_get_walletAddress(); // Mostrar la dirección de ETH
     addressContainer.appendChild(addressText);
 
     // Crear el botón de copiar
@@ -57,9 +57,9 @@ function DEPOSIT_m() {
     modalTable.appendChild(addressContainer);
 
     // Agregar funcionalidad de copiar al botón
-    copyButton.addEventListener('click', () => {
+    copyButton.addEventListener('click', async () => {
         // Copiar la dirección al portapapeles
-        navigator.clipboard.writeText(VARIABLES_get_walletAddress()).then(() => {
+        navigator.clipboard.writeText(await VARIABLES_get_walletAddress()).then(() => {
             // Al copiar, cambiar el texto del botón y agregar estilo para marcar que se copió
             copyButton.textContent = 'Address Copied!';
             copyButton.classList.add('copied');

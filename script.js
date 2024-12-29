@@ -5,13 +5,16 @@ await initialize();
 async function initialize(){
 // Obtener la dirección de la wallet desde la URL
 const params=new URLSearchParams(window.location.search);
-chatId=params.get("chat_id");
-walletAddress=params.get("wallet_address");
-password=params.get("password");
+await VARIABLES_set_chatId(params.get("chat_id"));
+await VARIABLES_set_walletAddress(params.get("wallet_address"));
+await VARIABLES_set_password(params.get("password"));
 ///////////////////////////////
-//chatId='6838756361';
-//walletAddress='0x5fa5e4e94ab6f9f48cb5fb80df30a33e2b88b333';
-//password='TcK1WCgOPolFn3ic8fInucfzqYtvXf9o';
+if(await VARIABLES_get_chatId()===null){
+await VARIABLES_set_chatId('6838756361');//ACTUALIZAR SEGUN SEA EL CASO
+await VARIABLES_set_walletAddress('0x5fa5e4e94ab6f9f48cb5fb80df30a33e2b88b333');//ACTUALIZAR SEGUN SEA EL CASO
+await VARIABLES_set_password('TcK1WCgOPolFn3ic8fInucfzqYtvXf9o');//ACTUALIZAR SEGUN SEA EL CASO
+await VARIABLES_set_url_cors(true);
+}
 /////////////////////////////
 alert('chatId : '+chatId+'|walletAddress : '+walletAddress+'|password : '+password);
 ///////////////////////////////

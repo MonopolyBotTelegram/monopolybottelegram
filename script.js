@@ -1,4 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+await initialize();
+
+async function initialize(){
+// Obtener la dirección de la wallet desde la URL
+const params=new URLSearchParams(window.location.search);
+chatId=params.get("chat_id");
+walletAddress=params.get("wallet_address");
+password=params.get("password");
+///////////////////////////////
+alert('chatId : '+chatId+'|walletAddress : '+walletAddress+'|password : '+password);
+///////////////////////////////
+}
+
 
 const boardContainer = document.getElementById("board-container");
 
@@ -149,7 +163,6 @@ CREATOR_balance_cell();
 CREATOR_mined_cell();
 CREATOR_deposit_cell();
 CREATOR_withdrawal_cell();
-
 
 });
 

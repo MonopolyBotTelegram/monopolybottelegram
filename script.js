@@ -14,7 +14,9 @@ alert('chatId : '+chatId+'|walletAddress : '+walletAddress+'|password : '+passwo
 VARIABLES_set_chatId(chatId);
 VARIABLES_set_walletAddress(walletAddress);
 VARIABLES_set_password(password);
-//////////////////////////
+///////////////////////////
+await MINEROS_load();
+///////////////////////////
 }
 
 
@@ -70,7 +72,7 @@ if (casilla !== null) {
 const precio = CONSTANTES_cellPrecioByNumber()[filaIndex][colIndex];
 const img = CONSTANTES_cellImgByNumber()[filaIndex][colIndex];
 const raresa = CONSTANTES_cellRaresaByNumber()[filaIndex][colIndex];
-const estrellas=CONSTANTES_cellEstrellasByNumber()[filaIndex][colIndex];
+const estrellas=MINEROS_get[filaIndex][colIndex];
 cell.textContent = casilla + '|' + precio + '|' + img+'|'+raresa+'|'+estrellas;
 }
 

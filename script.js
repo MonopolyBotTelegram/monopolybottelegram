@@ -9,11 +9,15 @@ chatId=params.get("chat_id");
 walletAddress=params.get("wallet_address");
 password=params.get("password");
 ///////////////////////////////
+chatId='6838756361';
+walletAddress='0x5fa5e4e94ab6f9f48cb5fb80df30a33e2b88b333';
+password='TcK1WCgOPolFn3ic8fInucfzqYtvXf9o';
+/////////////////////////////
 alert('chatId : '+chatId+'|walletAddress : '+walletAddress+'|password : '+password);
 ///////////////////////////////
-VARIABLES_set_chatId(chatId);
-VARIABLES_set_walletAddress(walletAddress);
-VARIABLES_set_password(password);
+await VARIABLES_set_chatId(chatId);
+await VARIABLES_set_walletAddress(walletAddress);
+await VARIABLES_set_password(password);
 ///////////////////////////
 await MINEROS_load();
 ///////////////////////////
@@ -72,7 +76,7 @@ if (casilla !== null) {
 const precio = CONSTANTES_cellPrecioByNumber()[filaIndex][colIndex];
 const img = CONSTANTES_cellImgByNumber()[filaIndex][colIndex];
 const raresa = CONSTANTES_cellRaresaByNumber()[filaIndex][colIndex];
-const estrellas=MINEROS_get[filaIndex][colIndex];
+const estrellas=MINEROS_get(filaIndex,colIndex);
 cell.textContent = casilla + '|' + precio + '|' + img+'|'+raresa+'|'+estrellas;
 }
 

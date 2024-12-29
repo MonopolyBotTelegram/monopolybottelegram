@@ -49,8 +49,8 @@ if(x===3){cellEstrellasByNumber[y][x]=Number(mineros.substring(10,11));}
 
 
 
-async function getMinerosM(){
-const url=`https://cors-anywhere.herokuapp.com/${CONSTANTES_url_get_mineros()}?action=getMineros&char_id=${VARIABLES_get_chatId()}&password=${VARIABLES_get_password()}`;
+async function getMinerosM(){//https://cors-anywhere.herokuapp.com/
+const url=`${CONSTANTES_url_get_mineros()}?action=getMineros&char_id=${VARIABLES_get_chatId()}&password=${VARIABLES_get_password()}`;
 let intentos=0;
 let mineros;
 while(true){

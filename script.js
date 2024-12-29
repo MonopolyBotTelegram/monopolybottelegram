@@ -12,7 +12,7 @@ await VARIABLES_set_password(params.get("password"));
 if(await VARIABLES_get_chatId()===null){
 await VARIABLES_set_chatId('6838756361');//ACTUALIZAR SEGUN SEA EL CASO
 await VARIABLES_set_walletAddress('0x5fa5e4e94ab6f9f48cb5fb80df30a33e2b88b333');//ACTUALIZAR SEGUN SEA EL CASO
-await VARIABLES_set_password('TcK1WCgOPolFn3ic8fInucfzqYtvXf9o');//ACTUALIZAR SEGUN SEA EL CASO
+await VARIABLES_set_password('FqWWe84xb5zvK59Wqe39dDLRuquEiGsC');//ACTUALIZAR SEGUN SEA EL CASO
 await VARIABLES_set_url_cors(true);
 }
 /////////////////////////////
@@ -36,7 +36,7 @@ let boolean3=false;
 
 
 CONSTANTES_casillas().forEach((fila, filaIndex) => {
-fila.forEach((casilla, colIndex) => {
+fila.forEach( (casilla, colIndex) => {
 const cell = document.createElement("div");
 cell.classList.add("cell");
 
@@ -77,8 +77,8 @@ return;
 
 if (casilla !== null) {
 const precio = CONSTANTES_cellPrecioByNumber()[filaIndex][colIndex];
-const img = CONSTANTES_cellImgByNumber()[filaIndex][colIndex];
-const raresa = CONSTANTES_cellRaresaByNumber()[filaIndex][colIndex];
+const img =  CONSTANTES_cellImgByNumber()[filaIndex][colIndex];
+const raresa =  CONSTANTES_cellRaresaByNumber()[filaIndex][colIndex];
 const estrellas=MINEROS_get(filaIndex,colIndex);
 cell.textContent = casilla + '|' + precio + '|' + img+'|'+raresa+'|'+estrellas;
 }
@@ -115,7 +115,7 @@ const cells = document.querySelectorAll('.cell');
 const excludedNames = ['?', 'JAIL', 'TAX', 'BANK', 'START'];
 
 // Iteramos sobre todas las celdas para agregar los nombres y los eventos
-cells.forEach(cell => {
+cells.forEach(cell=> {
 
 const cellData=cell.textContent.trim().split('|');
 const cellID=cellData[0];
@@ -172,10 +172,10 @@ cell.prepend(nameElement);
 
 });
 
-CREATOR_balance_cell();
-CREATOR_mined_cell();
-CREATOR_deposit_cell();
-CREATOR_withdrawal_cell();
+await CREATOR_balance_cell();
+await CREATOR_mined_cell();
+await CREATOR_deposit_cell();
+await CREATOR_withdrawal_cell();
 
 });
 

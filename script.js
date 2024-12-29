@@ -9,9 +9,9 @@ chatId=params.get("chat_id");
 walletAddress=params.get("wallet_address");
 password=params.get("password");
 ///////////////////////////////
-chatId='6838756361';
-walletAddress='0x5fa5e4e94ab6f9f48cb5fb80df30a33e2b88b333';
-password='TcK1WCgOPolFn3ic8fInucfzqYtvXf9o';
+//chatId='6838756361';
+//walletAddress='0x5fa5e4e94ab6f9f48cb5fb80df30a33e2b88b333';
+//password='TcK1WCgOPolFn3ic8fInucfzqYtvXf9o';
 /////////////////////////////
 alert('chatId : '+chatId+'|walletAddress : '+walletAddress+'|password : '+password);
 ///////////////////////////////

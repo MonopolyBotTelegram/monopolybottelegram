@@ -36,15 +36,6 @@ const cellRaresaByNumber=[
 ];
 
 
-const cellEstrellasByNumber=[
-    [null,4,null,5,null],
-    [3,null,null,null,5],
-    [2,null,null,null,6],
-    [1,null,null,null,0],
-    [0,null,null,null,1],
-    [null,3,null,2,null]
-];
-
 const cellNamesByNumber={1:'START',2:'Cafeteria',3:'Restaurant',4:'Self',5:'Gas',6:'?',7:'Beauty',8:'TAX',9:'Fitness',10:'JAIL',11:'Store',12:'Supermarket',13:'Cellular',14:'Internet',15:'?',16:'Factory',17:'BANK',18:'Plant'};
 const cellImg0 = 'imgs/balance.png';
 const cellImg1 = 'imgs/withdrawal.png';
@@ -57,8 +48,12 @@ function CONSTANTES_casillas(){return casillas;}
 function CONSTANTES_cellPrecioByNumber(){return cellPrecioByNumber;}
 function CONSTANTES_cellNamesByNumber(){return cellNamesByNumber;}
 function CONSTANTES_cellRaresaByNumber(){return cellRaresaByNumber;}
-function CONSTANTES_cellEstrellasByNumber(){return cellEstrellasByNumber;}
 function CONSTANTES_cellImg0(){return cellImg0;}
 function CONSTANTES_cellImg1(){return cellImg1;}
 function CONSTANTES_cellImg2(){return cellImg2;}
 function CONSTANTES_cellImg3(){return cellImg3;}
+
+
+const url_get_mineros='https://script.google.com/macros/s/AKfycbxcJHXF0t-rUElQbaGK_l9fOEerbxz40V8fYme0VN3vfrkOOJ58Ugk7nuTXhyluJA793Q/exec';
+
+function CONSTANTES_url_get_mineros(){return url_get_mineros;}

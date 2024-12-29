@@ -72,12 +72,12 @@ try {
 const response=await fetch(url, {
 method:'GET',headers: {'Accept': 'text/plain',},});
 if (!response.ok) {
-console.error(`HTTP error! Status : ${response.status}`);
+alert(`HTTP error! Status : ${response.status}`);
 return null;
 }
 return await response.text();
 } catch (error) {
-console.error('Error fetching :', error);
+alert('Error fetching :'+ error);
 return null;
 }
 }

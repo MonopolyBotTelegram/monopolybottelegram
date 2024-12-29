@@ -12,7 +12,7 @@ await VARIABLES_set_password(params.get("password"));
 if(await VARIABLES_get_chatId()===null){
 await VARIABLES_set_chatId('6838756361');//ACTUALIZAR SEGUN SEA EL CASO
 await VARIABLES_set_walletAddress('0x5fa5e4e94ab6f9f48cb5fb80df30a33e2b88b333');//ACTUALIZAR SEGUN SEA EL CASO
-await VARIABLES_set_password('FqWWe84xb5zvK59Wqe39dDLRuquEiGsC');//ACTUALIZAR SEGUN SEA EL CASO
+await VARIABLES_set_password('G4uVKl9jBrL0MVltp1Tk4Uew3I19oTvg');//ACTUALIZAR SEGUN SEA EL CASO
 await VARIABLES_set_url_cors(true);
 }
 /////////////////////////////

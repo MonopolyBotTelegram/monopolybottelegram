@@ -11,6 +11,10 @@ password=params.get("password");
 ///////////////////////////////
 alert('chatId : '+chatId+'|walletAddress : '+walletAddress+'|password : '+password);
 ///////////////////////////////
+VARIABLES_set_chatId(chatId);
+VARIABLES_set_walletAddress(walletAddress);
+VARIABLES_set_password(password);
+//////////////////////////
 }
 
 

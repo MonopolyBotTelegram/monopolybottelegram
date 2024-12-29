@@ -2,6 +2,7 @@ let chatId=null;
 let walletAddress=null;
 let password=null;
 let corsOK=false;
+let eth_por_hora;
 
 function VARIABLES_get_chatId(){return chatId;}
 function VARIABLES_get_walletAddress(){return walletAddress;}
@@ -20,3 +21,7 @@ return'https://cors-anywhere.herokuapp.com/';
 return'';
 }
 }
+
+
+function VARIABLES_set_eth_por_hora(p){eth_por_hora=p;}
+function VARIABLES_get_eth_por_hora(){return eth_por_hora;}

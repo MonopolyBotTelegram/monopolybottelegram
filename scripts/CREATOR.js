@@ -52,7 +52,7 @@ async function CREATOR_mined_cell() {
     if (!cellText) {
         // Si no existe, crear el texto
         cellText = document.createElement('span');
-        cellText.textContent = '0.00000000 eth/h';  // Establece el texto (ajústalo según lo necesites)
+        cellText.textContent = VARIABLES_get_eth_por_hora()+' eth/h';  // Establece el texto (ajústalo según lo necesites)
         mined_cells[0].appendChild(cellText);
     }
 

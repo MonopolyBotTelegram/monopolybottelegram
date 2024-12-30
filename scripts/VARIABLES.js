@@ -4,6 +4,7 @@ let password=null;
 let corsOK=false;
 let eth_por_hora;
 let eth_minado;
+let hora_actual;
 
 function VARIABLES_get_chatId(){return chatId;}
 function VARIABLES_get_walletAddress(){return walletAddress;}
@@ -23,6 +24,9 @@ return'';
 }
 }
 
+
+function VARIABLES_set_hora_actual(p){hora_actual=p;}
+function VARIABLES_get_hora_actual(){return hora_actual;}
 
 function VARIABLES_set_eth_por_hora(p){eth_por_hora=p;}
 function VARIABLES_get_eth_por_hora(){return eth_por_hora;}

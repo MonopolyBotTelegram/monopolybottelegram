@@ -55,5 +55,8 @@ function CONSTANTES_cellImg3(){return cellImg3;}
 
 
 const url_get_mineros='https://script.google.com/macros/s/AKfycbxcJHXF0t-rUElQbaGK_l9fOEerbxz40V8fYme0VN3vfrkOOJ58Ugk7nuTXhyluJA793Q/exec';
-
 function CONSTANTES_url_get_mineros(){return url_get_mineros;}
+
+const url_hora_actual='https://script.google.com/macros/s/AKfycbypxgNdDb2CFHXVERVBw-PHeDfk56HYAZvM6speTpJosAUyZx0OAvY3XWi453R1DfFG/exec';
+function CONSTANTES_url_hora_actual(){return url_hora_actual;}
+

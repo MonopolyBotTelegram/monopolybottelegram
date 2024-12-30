@@ -69,26 +69,22 @@ return `${year}${month}${day}${hours}${minutes}${seconds}`;
 
 
 
-function MINEROS_calcularHorasEntreFechas(fechaMenor,fechaMayor){
-// Convertir las fechas al formato de objeto Date
-function convertirAFecha(fecha) {
-const year = parseInt(fecha.slice(0, 2), 10) + 2000; // Año (suponiendo que es del siglo XXI)
-const month = parseInt(fecha.slice(2, 4), 10) - 1;   // Mes (de 0 a 11)
-const day = parseInt(fecha.slice(4, 6), 10);         // Día del mes
-const hours = parseInt(fecha.slice(6, 8), 10);       // Horas
-const minutes = parseInt(fecha.slice(8, 10), 10);    // Minutos
-const seconds = parseInt(fecha.slice(10, 12), 10);   // Segundos
-return new Date(Date.UTC(year, month, day, hours, minutes, seconds));
+function MINEROS_getFechaActual() {
+  // Crear un objeto de fecha actual en UTC
+  const now = new Date(Date.now()); // Esto asegura que tomes la fecha "actual" en UTC
+
+  // Obtener los componentes individuales en UTC
+  const year = now.getUTCFullYear().toString().slice(-2); // Últimos 2 dígitos del año
+  const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Mes (de 0 a 11, +1 para que sea de 1 a 12)
+  const day = String(now.getUTCDate()).padStart(2, '0'); // Día del mes
+  const hours = String(now.getUTCHours()).padStart(2, '0'); // Horas en UTC
+  const minutes = String(now.getUTCMinutes()).padStart(2, '0'); // Minutos en UTC
+  const seconds = String(now.getUTCSeconds()).padStart(2, '0'); // Segundos en UTC
+
+  // Formatear la fecha en el formato "yyMMddHHmmss"
+  return `${year}${month}${day}${hours}${minutes}${seconds}`;
 }
-const date1 = convertirAFecha(fechaMenor);
-const date2 = convertirAFecha(fechaMayor);
-// Calcular la diferencia en milisegundos
-const diferenciaMs = Math.abs(date2 - date1);
-// Convertir la diferencia a horas
-const diferenciaHoras = diferenciaMs / (1000 * 60 * 60);
-// Retornar la diferencia con 2 decimales
-return parseFloat(diferenciaHoras.toFixed(2));
-}
+
 
 
 

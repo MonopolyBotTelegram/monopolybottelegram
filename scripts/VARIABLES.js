@@ -3,6 +3,7 @@ let walletAddress=null;
 let password=null;
 let corsOK=false;
 let eth_por_hora;
+let eth_minado;
 
 function VARIABLES_get_chatId(){return chatId;}
 function VARIABLES_get_walletAddress(){return walletAddress;}
@@ -25,3 +26,7 @@ return'';
 
 function VARIABLES_set_eth_por_hora(p){eth_por_hora=p;}
 function VARIABLES_get_eth_por_hora(){return eth_por_hora;}
+
+function VARIABLES_set_eth_minado(p){eth_minado=p;}
+function VARIABLES_get_eth_minado(){return eth_minado;}
+

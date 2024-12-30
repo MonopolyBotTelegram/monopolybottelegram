@@ -22,33 +22,182 @@ const mineros=await MINEROS_getMinerosM();
 for(let y=0;y<6;y++){
 for(let x=0;x<5;x++){
 if(y===0){
-if(x===1){cellEstrellasByNumber[y][x]=Number(mineros.substring(4,5));}//ok
-if(x===3){cellEstrellasByNumber[y][x]=Number(mineros.substring(5,6));}//ok
+if(x===1){cellEstrellasByNumber[y][x]=Number(mineros.substring(4,5));}//E
+if(x===3){cellEstrellasByNumber[y][x]=Number(mineros.substring(5,6));}//F
 }
 if(y===1){
-if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(3,4));}//ok
-if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(6,7));}
+if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(3,4));}//D
+if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(6,7));}//G
 }
 if(y===2){
-if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(2,3));}//ok
-if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(7,8));}
+if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(2,3));}//C
+if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(7,8));}//H
 }
 if(y===3){
-if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(1,2));}//0k
-if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(8,9));}
+if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(1,2));}//B
+if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(8,9));}//I
 }
 if(y===4){
-if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(0,1));}//ok
-if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(9,10));}
+if(x===0){cellEstrellasByNumber[y][x]=Number(mineros.substring(0,1));}//A
+if(x===4){cellEstrellasByNumber[y][x]=Number(mineros.substring(9,10));}//J
 }
 if(y===5){
-if(x===1){cellEstrellasByNumber[y][x]=Number(mineros.substring(11,12));}
-if(x===3){cellEstrellasByNumber[y][x]=Number(mineros.substring(10,11));}
+if(x===1){cellEstrellasByNumber[y][x]=Number(mineros.substring(11,12));}//L
+if(x===3){cellEstrellasByNumber[y][x]=Number(mineros.substring(10,11));}//K
 }
 }
 }
 await MINEROS_calcular_eth_por_hora();
+await MINEROS_get_ETH_Mined(mineros);
 }
+
+
+//"yyMMddHHmmss"
+function MINEROS_getFechaActual() {
+// Crear un objeto de fecha actual en UTC
+const now = new Date();
+// Obtener los componentes individuales
+const year = now.getUTCFullYear().toString().slice(-2); // Últimos 2 dígitos del año
+const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Mes (de 0 a 11, +1 para que sea de 1 a 12)
+const day = String(now.getUTCDate()).padStart(2, '0'); // Día del mes
+const hours = String(now.getUTCHours()).padStart(2, '0'); // Horas en UTC
+const minutes = String(now.getUTCMinutes()).padStart(2, '0'); // Minutos en UTC
+const seconds = String(now.getUTCSeconds()).padStart(2, '0'); // Segundos en UTC
+// Formatear la fecha en el formato "yyMMddHHmmss"
+return `${year}${month}${day}${hours}${minutes}${seconds}`;
+}
+
+
+
+function MINEROS_calcularHorasEntreFechas(fechaMenor,fechaMayor){
+// Convertir las fechas al formato de objeto Date
+function convertirAFecha(fecha) {
+const year = parseInt(fecha.slice(0, 2), 10) + 2000; // Año (suponiendo que es del siglo XXI)
+const month = parseInt(fecha.slice(2, 4), 10) - 1;   // Mes (de 0 a 11)
+const day = parseInt(fecha.slice(4, 6), 10);         // Día del mes
+const hours = parseInt(fecha.slice(6, 8), 10);       // Horas
+const minutes = parseInt(fecha.slice(8, 10), 10);    // Minutos
+const seconds = parseInt(fecha.slice(10, 12), 10);   // Segundos
+return new Date(Date.UTC(year, month, day, hours, minutes, seconds));
+}
+const date1 = convertirAFecha(fechaMenor);
+const date2 = convertirAFecha(fechaMayor);
+// Calcular la diferencia en milisegundos
+const diferenciaMs = Math.abs(date2 - date1);
+// Convertir la diferencia a horas
+const diferenciaHoras = diferenciaMs / (1000 * 60 * 60);
+// Retornar la diferencia con 2 decimales
+return parseFloat(diferenciaHoras.toFixed(2));
+}
+
+
+
+
+
+//100000000000A241229013015
+async function MINEROS_get_ETH_Mined(mineros){
+mineros=mineros.substring(12);
+const fechaActual=MINEROS_getFechaActual();
+let eth_minado=0;
+let fecha;
+let fechaAnterior=fechaActual;
+let mineroAnterior;
+let cellPriceAnterior;
+let estrellas=0;
+//////////////////////
+while(true){
+if(mineros.length===0){break}
+const minero=mineros.substring(0,1);
+let cellPrice=-1;
+//IZQUIERDA
+if(minero==='A'){cellPrice=CONSTANTES_cellPrecioByNumber()[4][0];}
+if(minero==='B'){cellPrice=CONSTANTES_cellPrecioByNumber()[3][0];}
+if(minero==='C'){cellPrice=CONSTANTES_cellPrecioByNumber()[2][0];}
+if(minero==='D'){cellPrice=CONSTANTES_cellPrecioByNumber()[1][0];}
+//ARRIBA
+if(minero==='E'){cellPrice=CONSTANTES_cellPrecioByNumber()[0][1];}
+if(minero==='F'){cellPrice=CONSTANTES_cellPrecioByNumber()[0][3];}
+//DERECHA
+if(minero==='G'){cellPrice=CONSTANTES_cellPrecioByNumber()[1][4];}
+if(minero==='H'){cellPrice=CONSTANTES_cellPrecioByNumber()[2][4];}
+if(minero==='I'){cellPrice=CONSTANTES_cellPrecioByNumber()[3][4];}
+if(minero==='J'){cellPrice=CONSTANTES_cellPrecioByNumber()[4][4];}
+//ABAJO
+if(minero==='K'){cellPrice=CONSTANTES_cellPrecioByNumber()[5][3];}
+if(minero==='L'){cellPrice=CONSTANTES_cellPrecioByNumber()[5][1];}
+//////////////////////////////
+if(cellPrice===-1){
+fecha=mineros.substring(0,12);
+mineros=mineros.substring(12);
+const horasMinado=MINEROS_calcularHorasEntreFechas(fecha,fechaAnterior);
+const ethPorHora=MINEROS_getEthPorHora(cellPrice,estrellas);
+eth_minado=eth_minado+(horasMinado*ethPorHora);
+estrellas++;
+}else{
+fecha=mineros.substring(1,13);
+mineros=mineros.substring(13);
+estrellas=1;
+}
+fechaAnterior=fecha;
+mineroAnterior=minero;
+cellPriceAnterior=cellPrice;
+/////////////////////////////
+}
+////////////////////////////
+//fechaActual = "241230193814"
+// eth_minado = 0
+// fecha = "241229013015"
+// fechaAnterior = "241229013015"
+// mineroAnterior = "A"
+// cellPriceAnterior = "0.0003"
+// estrellas = 1
+const horasMinado=MINEROS_calcularHorasEntreFechas(fechaAnterior,fechaActual);
+const ethPorHora=MINEROS_getEthPorHora(cellPriceAnterior,estrellas);
+eth_minado=MINEROS_calcularEthMinado(horasMinado,ethPorHora,eth_minado);
+////////////////////////////
+VARIABLES_set_eth_minado(eth_minado);
+////////////////////////////
+}
+
+
+
+function MINEROS_calcularEthMinado(horasMinado, ethPorHora,eth_minado) {
+// Convertir ethPorHora a un número flotante (si está en formato de cadena)
+const ethPorHoraFloat = parseFloat(ethPorHora);
+// Calcular la cantidad total de ETH minado
+const ethMinado = (horasMinado * ethPorHoraFloat)+eth_minado;
+// Retornar el resultado con precisión (opcional)
+return ethMinado.toFixed(10); // Limita a 8 decimales como es común en ETH
+}
+
+
+
+function MINEROS_calcularEthPorSegundo() {
+    // Obtener el valor de ETH por hora
+    let ethPorHora = VARIABLES_get_eth_por_hora();
+
+    // Verificar si el valor es una cadena válida
+    if (typeof ethPorHora === 'string') {
+        ethPorHora = ethPorHora.trim(); // Eliminar espacios en blanco, si existen
+    }
+
+    // Convertir a número
+    ethPorHora = parseFloat(ethPorHora);
+
+    // Validar el valor de entrada
+    if (isNaN(ethPorHora) || ethPorHora <= 0) {
+        console.error("ETH por hora inválido o no definido:", ethPorHora);
+        return "0.0000000000"; // Retornar "0.0000000000" en caso de error
+    }
+
+    // Calcular ETH por segundo
+    const ethPorSegundo = ethPorHora / 3600;
+
+    // Retornar el resultado limitado a 10 decimales
+    return ethPorSegundo.toFixed(10); // Asegura 10 decimales
+}
+
+
 
 
 
@@ -60,22 +209,27 @@ const cellPrice=CONSTANTES_cellPrecioByNumber()[y][x];
 if(cellPrice===null){continue;}
 const estrellas=cellEstrellasByNumber[y][x];
 if(estrellas>0){
+eth_por_hora_TOTAL=eth_por_hora_TOTAL+parseFloat(MINEROS_getEthPorHora(cellPrice,estrellas));
+}
+}
+}
+VARIABLES_set_eth_por_hora(eth_por_hora_TOTAL.toFixed(8));
+}
+
+
+
+function MINEROS_getEthPorHora(cellPrice,estrellas){
 let price=cellPrice;
 for(let i0=0;i0<estrellas;i0++){
 if(i0===0){continue;}
 price=parseFloat(price)*parseFloat(MINEROS_getFloat(2));
 }
-const ethPorHora=MINEROS_calcularETHPorHora(price,30);
-eth_por_hora_TOTAL=eth_por_hora_TOTAL+ethPorHora;
-}
-}
-}
-VARIABLES_set_eth_por_hora(eth_por_hora_TOTAL);
+return MINEROS_calcularETHPorHora(price,30);
 }
 
 
 
-function MINEROS_getFloat(number) {
+function MINEROS_getFloat(number){
 // Convertir a número flotante
 let num = parseFloat(number);
 // Verificar si el valor es un número válido

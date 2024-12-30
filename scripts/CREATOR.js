@@ -1,37 +1,76 @@
 async function CREATOR_balance_cell() {
     const balance_cells = document.getElementsByClassName('balance-cell'); // Selecciona todos los elementos con la clase 'balance-cell'
 
-    // Establecer la imagen de fondo
-    balance_cells[0].style.backgroundImage = `url('${CONSTANTES_cellImg0()}')`;
-    balance_cells[0].style.backgroundSize = '75% 50%'; // Ajusta el tamaño de la imagen al 75% de la celda
-    balance_cells[0].style.backgroundPosition = 'center bottom'; // Centra la imagen en la parte inferior
-    balance_cells[0].style.backgroundRepeat = 'no-repeat'; // Evita que la imagen se repita
-    balance_cells[0].style.position = 'relative'; // Asegura que los elementos dentro de la celda estén posicionados en relación a la celda
+    if (balance_cells.length > 0) {
+        const cell = balance_cells[0]; // Usamos solo la primera celda
 
-    // Verificar si el texto ya existe
-    let cellText = balance_cells[0].querySelector('span');
-    if (!cellText) {
-        // Si no existe, crear el texto
-        cellText = document.createElement('span');
-        cellText.textContent = '0.00000000 ETH';  // Establece el texto
-        balance_cells[0].appendChild(cellText);
+        // Configurar el estilo de la celda
+        cell.style.backgroundImage = `url('${CONSTANTES_cellImg0()}')`;
+        cell.style.backgroundSize = '75% 50%'; // Ajusta el tamaño de la imagen
+        cell.style.backgroundPosition = 'center bottom'; // Centra la imagen
+        cell.style.backgroundRepeat = 'no-repeat';
+        cell.style.position = 'relative';
+
+        // Verificar si el texto ya existe
+        let cellText = cell.querySelector('span');
+        if (!cellText) {
+            // Crear el texto si no existe
+            cellText = document.createElement('span');
+            cell.appendChild(cellText);
+        }
+
+        // Configurar estilo del texto
+        cellText.style.position = 'absolute';
+        cellText.style.top = '65%';
+        cellText.style.left = '50%';
+        cellText.style.transform = 'translateX(-50%)';
+        cellText.style.fontSize = '16px';
+        cellText.style.color = 'black';
+        cellText.style.fontWeight = 'bold';
+        cellText.style.textShadow = '2px 2px 4px rgba(255, 255, 255, 0.7)';
+        cellText.style.whiteSpace = 'nowrap';  // Evitar que el texto se divida en varias líneas
+
+        // Evento de clic
+        cell.onclick = function () {
+            FUNCIONES_balance_cell();
+        };
+
+        // Inicializar el ETH mostrado
+        let ethMinadoActual = parseFloat(VARIABLES_get_eth_minado());
+        const ethFormatted = formatEthWithSmallDecimals(ethMinadoActual); // Formatear el balance de ETH
+        cellText.innerHTML = ethFormatted+' ETH'; // Establecer el HTML
+
+        // Actualizar ETH cada segundo
+        setInterval(() => {
+            console.log("Bucle de actualización iniciado."); // Depuración
+            const ethPorSegundo = parseFloat(MINEROS_calcularEthPorSegundo());
+
+            if (!isNaN(ethPorSegundo)) {
+                ethMinadoActual += ethPorSegundo; // Sumar ETH generado
+                VARIABLES_set_eth_minado(ethMinadoActual); // Guardar el nuevo valor
+                const ethFormatted = formatEthWithSmallDecimals(ethMinadoActual); // Formatear el balance actualizado
+                cellText.innerHTML = ethFormatted+' ETH'; // Actualizar el texto con el balance formateado
+                console.log(`ETH actualizado: ${ethMinadoActual.toFixed(10)}`);
+            } else {
+                console.error("calcularEthPorSegundo devolvió un valor no numérico.");
+            }
+        }, 1000);
+    } else {
+        console.error("No se encontraron elementos con la clase 'balance-cell'.");
     }
-
-    // Estilo para el texto
-    cellText.style.position = 'absolute';  // Posiciona el texto de forma absoluta
-    cellText.style.top = '65%';  // Desplaza el texto un poco más hacia abajo, ajusta el valor según lo necesites
-    cellText.style.left = '50%';  // Centra el texto horizontalmente
-    cellText.style.transform = 'translateX(-50%)';  // Ajusta para que el texto esté exactamente centrado horizontalmente
-    cellText.style.fontSize = '16px';  // Tamaño de la fuente ajustable
-    cellText.style.color = 'black';  // Color del texto negro
-    cellText.style.fontWeight = 'bold';  // Hacer el texto más destacado
-    cellText.style.textShadow = '2px 2px 4px rgba(255, 255, 255, 0.7)'; // Agregar sombra para mejorar la legibilidad
-
-    // Evento al hacer clic
-    balance_cells[0].onclick = function() {
-        FUNCIONES_balance_cell();
-    };
 }
+
+// Función para formatear el balance de ETH con 10 decimales y hacer los dos últimos números más pequeños (en la misma altura de la base)
+function formatEthWithSmallDecimals(ethValue) {
+    const ethString = ethValue.toFixed(10); // Obtener el balance con 10 decimales
+    const mainPart = ethString.slice(0, -2); // Parte principal (sin los dos últimos dígitos)
+    const smallPart = ethString.slice(-2); // Los dos últimos dígitos
+
+    // Retornar el HTML con un contenedor que mantiene todo en una sola línea y ajusta la alineación
+    return `<span style="white-space: nowrap; display: inline-block; line-height: 1;">${mainPart}<span style="font-size: 12px; vertical-align: middle; display: inline-block;">${smallPart}</span></span>`;
+}
+
+
 
 
 

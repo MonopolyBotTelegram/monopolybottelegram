@@ -80,7 +80,7 @@ const precio = CONSTANTES_cellPrecioByNumber()[filaIndex][colIndex];
 const img =  CONSTANTES_cellImgByNumber()[filaIndex][colIndex];
 const raresa =  CONSTANTES_cellRaresaByNumber()[filaIndex][colIndex];
 const estrellas=MINEROS_get(filaIndex,colIndex);
-cell.textContent = casilla + '|' + precio + '|' + img+'|'+raresa+'|'+estrellas;
+cell.textContent = casilla + '|' + precio + '|' + img+'|'+raresa+'|'+estrellas+'|'+filaIndex+'|'+colIndex;
 }
 
 if(boolean0){
@@ -123,6 +123,8 @@ const cellPrecio=cellData[1];
 const cellImg=cellData[2];
 const cellRaresa=cellData[3];
 const cellEstrellas=Number(cellData[4]);
+const cellFilaIndex=cellData[5];
+const cellColIndex=cellData[6];
 // Obtenemos el número visible dentro de la celda
 const cellNumber = parseInt(cellID);
 
@@ -152,11 +154,11 @@ cell.prepend(nameElement);
 
     const baseImg = cellImg; // URL de la imagen de fondo principal
     const nestedImg ='imgs/estrella.png'; // URL de la imagen que estará dentro
-    FUNCIONES_setHorizontalOverlays(cell, baseImg, nestedImg,cellEstrellas);
+    FUNCIONES_setHorizontalOverlays(cell, baseImg, nestedImg,cellFilaIndex,cellColIndex);
 
     // Agregamos el evento de clic para mostrar el modal
     cell.addEventListener('click', () => {
-        FUNCIONES_mostrarModal0(cellNumber,baseImg,nestedImg,cellEstrellas,cellRaresa,cellPrecio);
+        FUNCIONES_mostrarModal0(cellNumber,cellRaresa,cellPrecio,cell, baseImg, nestedImg,cellFilaIndex,cellColIndex);
     });
 
 }else{

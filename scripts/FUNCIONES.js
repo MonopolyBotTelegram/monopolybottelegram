@@ -1,130 +1,148 @@
-function FUNCIONES_mostrarModal0(cellNumber, baseImg, nestedImg, cellEstrellas, cellRaresa,cellPrecio) {
+function FUNCIONES_mostrarModal0(cellNumber,cellRaresa,cellPrecio, cell, baseImg, nestedImg,cellFilaIndex,cellColIndex) {
+    const cellEstrellas=MINEROS_get(cellFilaIndex,cellColIndex);
+
+    console.log("FUNCIONES_mostrarModal0 " + cellFilaIndex + ':' + cellColIndex);
 
     const modal = document.getElementById('cellModal');
-    const modalTitle = document.getElementById('modalTitle'); // Título del modal
-    const modalTable = document.getElementById('modalTable'); // Tabla dentro del modal
-    const footerBtn = document.getElementById('footerBtn'); // Botón en el pie
-    const closeModalBtn = document.querySelector('.close-button'); // Botón de cerrar (X)
-    const cellModalEstrellas = document.getElementById('cellModalEstrellas'); // Contenedor de estrellas
+    const modalTitle = document.getElementById('modalTitle');
+    const modalTable = document.getElementById('modalTable');
+    const footerBtn = document.getElementById('footerBtn');
+    const closeModalBtn = document.querySelector('.close-button');
+    const cellModalEstrellas = document.getElementById('cellModalEstrellas');
 
     // Establecer el título del modal
     modalTitle.textContent = cellRaresa;
 
-    // Mostrar el modal al cambiar la propiedad display a 'flex'
+    // Mostrar el modal
     modal.style.display = 'flex';
 
     // Establecer la imagen de fondo del modal
     modal.style.backgroundImage = `url('${baseImg}')`;
-    modal.style.backgroundSize = 'cover'; // Aseguramos que la imagen cubra todo el modal
-    modal.style.backgroundPosition = 'center'; // Centrar la imagen
+    modal.style.backgroundSize = 'cover';
+    modal.style.backgroundPosition = 'center';
 
     // Crear la tabla dentro del modal
-    modalTable.innerHTML = ''; // Limpiar cualquier contenido previo de la tabla
+    modalTable.innerHTML = '';
 
-    // Crear las filas de la tabla
     for (let i = 0; i < 7; i++) {
-        const row = document.createElement('tr'); // Crear una fila
+        const row = document.createElement('tr');
         for (let j = 0; j < 3; j++) {
-            const cell = document.createElement('td'); // Crear una celda
-
-            // Si estamos en la primera columna, agregar una imagen
+            const cell = document.createElement('td');
             if (j === 0) {
-                if(i===0){
-               // const img = document.createElement('img');
-               // img.src = nestedImg; // Cambia por la fuente de la imagen
-                //img.style.width = '20px'; // Ajusta el tamaño de la imagen
-               // img.style.height = '20px';
-                // img.style.borderRadius = '50%'; // Hacer que la imagen sea circular
-                //  img.style.backgroundPosition = 'center'; // Centrar la imagen
-                //cell.appendChild(img);
-                }else{
+                if (i === 0) {
+                    // No se está añadiendo imagen aquí, pero puedes personalizarlo si es necesario.
+                } else {
                     const text = document.createElement('span');
-                    text.textContent =i;
-                    text.style.color='#000000';
-                    text.style.fontStyle='bold';
+                    text.textContent = i;
+                    text.style.color = '#000000';
+                    text.style.fontStyle = 'bold';
                     cell.appendChild(text);
                 }
             } else {
                 const text = document.createElement('span');
-                text.style.color='#000000';text.style.fontStyle='bold';
-if(j===1&&i==0){text.textContent = 'Price ETH';}else{
-if(j===2&&i==0){text.textContent = 'Mined eth/h';}else{
-    const price= getPrice(j, i, cellPrecio);
-if(j==1) {
-    text.textContent = price ; // Aquí puedes agregar texto dinámico si lo necesitas
-}else {
-
-    text.textContent = getMined(j, i, price); // Aquí puedes agregar texto dinámico si lo necesitas
-}
-}
-}
+                text.style.color = '#000000';
+                text.style.fontStyle = 'bold';
+                if (j === 1 && i === 0) {
+                    text.textContent = 'Price ETH';
+                } else if (j === 2 && i === 0) {
+                    text.textContent = 'Mined eth/h';
+                } else {
+                    const price = getPrice(j, i, cellPrecio);
+                    text.textContent = j === 1 ? price : getMined(j, i, price);
+                }
                 cell.appendChild(text);
             }
             row.appendChild(cell);
         }
-        modalTable.appendChild(row); // Agregar la fila a la tabla
+        modalTable.appendChild(row);
     }
 
-
-    // Agregar estrellas al contenedor de estrellas
-    cellModalEstrellas.innerHTML = ''; // Limpiar el contenido anterior
-
+    // Agregar estrellas al contenedor
+    cellModalEstrellas.innerHTML = '';
     for (let i = 0; i < cellEstrellas; i++) {
         const img = document.createElement('img');
-       img.src = nestedImg; // Cambia por la fuente de la imagen
-        img.style.width = '20px'; // Ajusta el tamaño de la imagen
+        img.src = nestedImg;
+        img.style.width = '20px';
         img.style.height = '20px';
-        img.style.borderRadius = '50%'; // Hacer que la imagen sea circular
-         img.style.backgroundPosition = 'center'; // Centrar la imagen
+        img.style.borderRadius = '50%';
+        img.style.backgroundPosition = 'center';
         cellModalEstrellas.appendChild(img);
     }
     cellModalEstrellas.style.display = 'flex';
-    cellModalEstrellas.style.justifyContent = 'center'; // Centrar horizontalmente
-    cellModalEstrellas.style.alignItems = 'center'; // Asegurar alineación vertical
+    cellModalEstrellas.style.justifyContent = 'center';
+    cellModalEstrellas.style.alignItems = 'center';
+    cellModalEstrellas.style.marginTop = '10px';
 
-
-    // Agregar un margen superior para separar las estrellas de la tabla
-    cellModalEstrellas.style.marginTop = '10px'; // Ajusta el valor de 10px según sea necesario
-
-
+    // Eliminar cualquier controlador de eventos anterior y asignar nuevos
+    footerBtn.replaceWith(footerBtn.cloneNode(true));
+    const newFooterBtn = document.getElementById('footerBtn');
+    newFooterBtn.addEventListener('click', async () => {
+        modal.style.display = 'none';
+        await openSecondModal(cellFilaIndex, cellColIndex);
+    });
 
     // Cerrar el modal al hacer clic en el botón de cerrar (X)
-    closeModalBtn.addEventListener('click', () => {
+    closeModalBtn.replaceWith(closeModalBtn.cloneNode(true));
+    const newCloseModalBtn = document.querySelector('.close-button');
+    newCloseModalBtn.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 
-    // Cerrar el primer modal al hacer clic en el botón de pie
-    footerBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        // Abrir el segundo modal cuando se hace clic en el botón "Upgrade"
-        openSecondModal();
-    });
+    async function openSecondModal(cellFilaIndex, cellColIndex) {
+        const loadingModal_upgrade = document.getElementById('loadingModal_upgrade');
+        const screenBlocker_upgrade = document.getElementById('screenBlocker_upgrade');
 
+        // Mostrar el modal de carga y bloquear la pantalla
+        loadingModal_upgrade.style.display = 'flex';
+        screenBlocker_upgrade.style.display = 'block';
+        screenBlocker_upgrade.style.pointerEvents = 'all';
 
+        const minero = await CONSTANTES_cellMineroByNumber()[parseInt(cellFilaIndex)][parseInt(cellColIndex)];
+        console.log("openSecondModal(cellFilaIndex=" + cellFilaIndex + ", cellColIndex=" + cellColIndex + ") " + minero);
 
+       const upgrade_ok= await MINEROS_updateMinerosAlerta('1', minero+cellEstrellas);
+        // Ocultar el modal de carga y desbloquear la pantalla
+        loadingModal_upgrade.style.display = 'none';
+        screenBlocker_upgrade.style.display = 'none';
+        screenBlocker_upgrade.style.pointerEvents = 'none';
 
-    // Función para abrir el segundo modal
-    function openSecondModal() {
-        const secondModal = document.getElementById('secondModal');
-        secondModal.style.display = 'flex'; // Mostrar el segundo modal
+        if(upgrade_ok){
 
-        // Cerrar el segundo modal al hacer clic en el botón de cerrar (X)
-        const secondCloseBtn = secondModal.querySelector('.close-button');
-        secondCloseBtn.addEventListener('click', () => {
-            secondModal.style.display = 'none';
-        });
+            await MINEROS_set(cellFilaIndex, cellColIndex);
+            await FUNCIONES_setHorizontalOverlays(cell, baseImg, nestedImg,cellFilaIndex,cellColIndex);
+            // Actualizar el contenedor de estrellas
+            const cellModalEstrellas = document.getElementById('cellModalEstrellas');
+            await FUNCIONES_actualizarEstrellas(cellModalEstrellas, nestedImg, cellEstrellas+1);
+        }
 
-        // Cerrar el segundo modal al hacer clic en el botón de pie
-        const secondFooterBtn = document.getElementById('secondFooterBtn');
-        secondFooterBtn.addEventListener('click', () => {
-            secondModal.style.display = 'none';
-        });
+        alert('Upgrade completed');
     }
 
 
+    async function FUNCIONES_actualizarEstrellas(cellModalEstrellas, nestedImg, cellEstrellas) {
+        // Limpiar el contenido actual del contenedor
+        cellModalEstrellas.innerHTML = '';
 
+        // Generar nuevas estrellas
+        for (let i = 0; i < cellEstrellas; i++) {
+            const img = document.createElement('img');
+            img.src = nestedImg; // Ruta de la imagen de la estrella
+            img.style.width = '20px'; // Ajustar tamaño
+            img.style.height = '20px';
+            img.style.borderRadius = '50%';
+            img.style.backgroundPosition = 'center';
+            cellModalEstrellas.appendChild(img);
+        }
+
+        // Asegurar el diseño del contenedor
+        cellModalEstrellas.style.display = 'flex';
+        cellModalEstrellas.style.justifyContent = 'center';
+        cellModalEstrellas.style.alignItems = 'center';
+        cellModalEstrellas.style.marginTop = '10px';
+    }
 
 }
+
 
 
 
@@ -142,7 +160,10 @@ async function FUNCIONES_mined_cell(){await FUNCIONES_mostrarModal1('mined');}
 async function FUNCIONES_withdrawal_cell(){await FUNCIONES_mostrarModal1('withdrawal');}
 
 
-async function FUNCIONES_setHorizontalOverlays(cell, baseImg, overlayImg, numOverlays) {
+async function FUNCIONES_setHorizontalOverlays(cell, baseImg, overlayImg,cellFilaIndex,cellColIndex) {
+
+        const numOverlays=MINEROS_get(cellFilaIndex,cellColIndex);
+
         // Mantener la imagen base intacta
         cell.style.backgroundImage = `url('${baseImg}')`;
         cell.style.backgroundSize = '100% 100%'; // Base cubre todo el contenedor
@@ -220,6 +241,8 @@ async function FUNCIONES_setHorizontalOverlays(cell, baseImg, overlayImg, numOve
 
 
 
+
+
 let tablaPrice=[
 [0,0],
 [0,0],
@@ -258,10 +281,10 @@ function getFloat(number) {
     // Verificar si el valor es un número válido
     if (!isNaN(num)) {
         let fixedNumber = num.toFixed(8);  // Limitar a 8 decimales
-        console.log(fixedNumber); // "123.45600000"
+        //console.log(fixedNumber); // "123.45600000"
         return fixedNumber;  // Retorna el valor formateado
     } else {
-        console.log("El valor no es un número válido.");
+        //console.log("El valor no es un número válido.");
         return null;  // Retorna null si no es un número válido
     }
 }

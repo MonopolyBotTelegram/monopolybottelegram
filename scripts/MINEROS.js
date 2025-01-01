@@ -13,7 +13,9 @@ function MINEROS_get(y,x){
 return cellEstrellasByNumber[y][x];
 }
 
-
+function MINEROS_set(y,x){
+cellEstrellasByNumber[y][x]++;
+}
 
 async function MINEROS_load(){
 //////////////////
@@ -220,10 +222,10 @@ let num = parseFloat(number);
 // Verificar si el valor es un número válido
 if (!isNaN(num)) {
 let fixedNumber = num.toFixed(8);  // Limitar a 8 decimales
-console.log(fixedNumber); // "123.45600000"
+//console.log(fixedNumber); // "123.45600000"
 return fixedNumber;  // Retorna el valor formateado
 } else {
-console.log("El valor no es un número válido.");
+//console.log("El valor no es un número válido.");
 return null;  // Retorna null si no es un número válido
 }
 }
@@ -295,6 +297,20 @@ return fecha;
 
 
 
-function MINEROS_upgrade(y,x,eth){
-
+async function MINEROS_updateMinerosAlerta(alerta,minero){
+const url=`${VARIABLES_get_url_cors()}${CONSTANTES_url_updateMinerosAlerta()}?action=updateMinerosAlerta&char_id=${await VARIABLES_get_chatId()}&password=${await VARIABLES_get_password()}&new_mineros_alerta=${alerta}${minero}`;
+let intentos=0;
+let mineros;
+while(true){
+mineros=await MINEROS_load_url(url);
+if(mineros===null){
+intentos++;
+if(intentos===10){
+return false;
 }
+}else{
+return true;
+}
+}
+}
+

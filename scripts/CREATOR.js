@@ -42,7 +42,7 @@ async function CREATOR_balance_cell() {
 
         // Actualizar ETH cada segundo
         setInterval(() => {
-            console.log("Bucle de actualización iniciado."); // Depuración
+            //console.log("Bucle de actualización iniciado."); // Depuración
             const ethPorSegundo = parseFloat(MINEROS_calcularEthPorSegundo());
 
             if (!isNaN(ethPorSegundo)) {
@@ -50,7 +50,7 @@ async function CREATOR_balance_cell() {
                 VARIABLES_set_eth_minado(ethMinadoActual); // Guardar el nuevo valor
                 const ethFormatted = formatEthWithSmallDecimals(ethMinadoActual); // Formatear el balance actualizado
                 cellText.innerHTML = ethFormatted+' ETH'; // Actualizar el texto con el balance formateado
-                console.log(`ETH actualizado: ${ethMinadoActual.toFixed(10)}`);
+                //console.log(`ETH actualizado: ${ethMinadoActual.toFixed(10)}`);
             } else {
                 console.error("calcularEthPorSegundo devolvió un valor no numérico.");
             }

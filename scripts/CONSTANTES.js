@@ -73,3 +73,12 @@ function CONSTANTES_url_hora_actual(){return url_hora_actual;}
 
 const url_updateMinerosAlerta='https://script.google.com/macros/s/AKfycbx7CtMQeisxLfRXtxvRBrGvNLyZfneeHs-JqqbSO5WaLoAxFYp3GY_P0LhOTCczwTyAZg/exec';
 function CONSTANTES_url_updateMinerosAlerta(){return url_updateMinerosAlerta;}
+
+const url_getBalanceDepositado='https://script.google.com/macros/s/AKfycbxhJgk7iAkPNfproYS2q6BgR1oXGSsl52OstwugswQm1xoQdt5-Nzc3hKh7cAWmzeYiDA/exec';
+function CONSTANTES_url_getBalanceDepositado(){return url_getBalanceDepositado;}
+
+
+
+
+
+

@@ -1,3 +1,4 @@
+let actualizar_balance_cell=true;
 async function CREATOR_balance_cell() {
     const balance_cells = document.getElementsByClassName('balance-cell'); // Selecciona todos los elementos con la clase 'balance-cell'
 
@@ -37,23 +38,31 @@ async function CREATOR_balance_cell() {
 
         // Inicializar el ETH mostrado
         let ethMinadoActual = parseFloat(VARIABLES_get_eth_minado());
-        const ethFormatted = formatEthWithSmallDecimals(ethMinadoActual); // Formatear el balance de ETH
+        let ethDepositado=parseFloat(VARIABLES_getBalanceDepositado());
+        const balance=ethMinadoActual+ethDepositado;
+        const ethFormatted = formatEthWithSmallDecimals(balance); // Formatear el balance de ETH
         cellText.innerHTML = ethFormatted+' ETH'; // Establecer el HTML
 
         // Actualizar ETH cada segundo
         setInterval(() => {
-            //console.log("Bucle de actualización iniciado."); // Depuración
+           if(actualizar_balance_cell){
+            ethMinadoActual = parseFloat(VARIABLES_get_eth_minado());
+            ethDepositado=parseFloat(VARIABLES_getBalanceDepositado());
             const ethPorSegundo = parseFloat(MINEROS_calcularEthPorSegundo());
 
             if (!isNaN(ethPorSegundo)) {
                 ethMinadoActual += ethPorSegundo; // Sumar ETH generado
                 VARIABLES_set_eth_minado(ethMinadoActual); // Guardar el nuevo valor
-                const ethFormatted = formatEthWithSmallDecimals(ethMinadoActual); // Formatear el balance actualizado
+
+                const balance=ethMinadoActual+ethDepositado;
+
+                const ethFormatted = formatEthWithSmallDecimals(balance); // Formatear el balance actualizado
                 cellText.innerHTML = ethFormatted+' ETH'; // Actualizar el texto con el balance formateado
-                //console.log(`ETH actualizado: ${ethMinadoActual.toFixed(10)}`);
+
             } else {
                 console.error("calcularEthPorSegundo devolvió un valor no numérico.");
             }
+           }
         }, 1000);
     } else {
         console.error("No se encontraron elementos con la clase 'balance-cell'.");
@@ -71,6 +80,37 @@ function formatEthWithSmallDecimals(ethValue) {
 }
 
 
+
+
+async function CREATOR_actualizar_balance_cell() {
+    actualizar_balance_cell=false;
+    const balance_cells = document.getElementsByClassName('balance-cell'); // Selecciona todas las celdas
+    if (balance_cells.length > 0) {
+        const cell = balance_cells[0]; // Usamos solo la primera celda
+
+        // Seleccionar el texto dentro de la celda
+        let cellText = cell.querySelector('span');
+        if (!cellText) {
+            console.error("No se encontró un elemento de texto en la celda balance.");
+            return;
+        }
+
+        // Obtener el balance actual
+        let ethMinadoActual = parseFloat(VARIABLES_get_eth_minado());
+        let ethDepositado = parseFloat(VARIABLES_getBalanceDepositado());
+
+        const balance = ethMinadoActual + ethDepositado;
+
+        // Formatear el balance de ETH
+        const ethFormatted = formatEthWithSmallDecimals(balance);
+
+        // Actualizar el texto de la celda
+        cellText.innerHTML = ethFormatted + ' ETH';
+    } else {
+        console.error("No se encontraron elementos con la clase 'balance-cell'.");
+    }
+    actualizar_balance_cell=true;
+}
 
 
 
@@ -111,6 +151,26 @@ async function CREATOR_mined_cell() {
     };
 }
 
+
+
+
+async function CREATOR_actualizar_mined_cell() {
+    const mined_cells = document.getElementsByClassName('mined-cell'); // Selecciona todas las celdas con clase 'mined-cell'
+    if (mined_cells.length > 0) {
+        const cell = mined_cells[0]; // Usamos la primera celda
+        let cellText = cell.querySelector('span'); // Seleccionamos el texto dentro de la celda
+
+        if (!cellText) {
+            console.error("No se encontró un elemento de texto en la celda mined.");
+            return;
+        }
+
+        // Actualizar el texto de la celda
+        cellText.textContent = VARIABLES_get_eth_por_hora().toFixed(8) + ' eth/h';
+    } else {
+        console.error("No se encontraron elementos con la clase 'mined-cell'.");
+    }
+}
 
 
 

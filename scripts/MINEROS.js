@@ -222,10 +222,8 @@ let num = parseFloat(number);
 // Verificar si el valor es un número válido
 if (!isNaN(num)) {
 let fixedNumber = num.toFixed(8);  // Limitar a 8 decimales
-//console.log(fixedNumber); // "123.45600000"
 return fixedNumber;  // Retorna el valor formateado
 } else {
-//console.log("El valor no es un número válido.");
 return null;  // Retorna null si no es un número válido
 }
 }
@@ -314,3 +312,20 @@ return true;
 }
 }
 
+
+
+async function MINEROS_getBalanceDepositado(){
+const url=`${VARIABLES_get_url_cors()}${CONSTANTES_url_getBalanceDepositado()}?action=getMavia&char_id=${await VARIABLES_get_chatId()}&password=${await VARIABLES_get_password()}`;
+let intentos=0;
+let fecha;
+while(true){
+fecha=await MINEROS_load_url(url);
+if(fecha===null){
+intentos++;
+if(intentos===10){break}
+}else{
+break
+}
+}
+return fecha;
+}

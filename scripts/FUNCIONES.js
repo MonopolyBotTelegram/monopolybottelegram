@@ -106,7 +106,7 @@ function FUNCIONES_mostrarModal0(cellNumber,cellRaresa,cellPrecio, cell, baseImg
 
         const minero = await CONSTANTES_cellMineroByNumber()[parseInt(cellFilaIndex)][parseInt(cellColIndex)];
 
-       const upgrade_ok= await MINEROS_updateMinerosAlerta('1', minero+cellEstrellas);
+       const upgrade_ok= await MINEROS_updateMinerosAlerta('1', minero);
         // Ocultar el modal de carga y desbloquear la pantalla
         loadingModal_upgrade.style.display = 'none';
         screenBlocker_upgrade.style.display = 'none';

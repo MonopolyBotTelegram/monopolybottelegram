@@ -23,6 +23,7 @@ await VARIABLES_set_walletAddress(walletAddress);
 await VARIABLES_set_password(password);
 ///////////////////////////
 await MINEROS_load();
+VARIABLES_setBalanceDepositado(parseFloat(await MINEROS_getBalanceDepositado()));
 ///////////////////////////
 }
 
